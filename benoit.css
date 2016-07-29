@@ -1,0 +1,48 @@
+body {
+    width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+#control {
+    width: 400px;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+#status {
+    width: 400px;
+    border: 1px solid black;
+    padding: 4px;
+    margin-top: 4px;
+    visibility: hidden;
+}
+
+#render {
+    float: right;
+    padding: 4px;
+}
+
+#canvas {
+    width: 600px;
+    height: 600px;
+    border: 1px solid black;
+}
+
+#about {
+    width: 400px;
+    border: 1px solid black;
+    padding: 4px;
+    margin-top: 4px;
+}
+
+.error {
+    color: red;
+    display: none;
+}
+
+#run_step {
+    display: none;
+}
+

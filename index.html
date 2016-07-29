@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mandelbrot Set Visualization Demonstration</title>
+    <link rel='stylesheet' type='text/css' href='benoit.css'/>
+  </head>
+  <body>
+    <h1>Mandelbrot Set Visualization Demonstration</h1>
+    <div id='main'>
+      <div id='render'>
+	<canvas id='canvas' width=600, height=600>
+	</canvas>
+	<p>Click anywhere to zoom in; right-click to zoom out</p>
+      </div>
+      <div id='control'>
+	<table>
+	  <tbody>
+	    <tr>
+	      <td><label for='minx'>Min X:</label></td>
+	      <td><input type='text' name='minx' id='minx' size='15' value='-2.0'/></td>
+	      <td><span class='error' id='minx-error'>Min X error here</span></td>
+	    </tr>
+	    <tr>
+	      <td><label for='miny'>Min Y:</label></td>
+	      <td><input type='text' name='miny' id='miny' size='15' value='-1.25'/></td>
+	      <td><span class='error' id='miny-error'>Min Y error here</span></td>
+	    </tr>
+	    <tr>
+	      <td><label for='maxx'>Max X:</label></td>
+	      <td><input type='text' name='maxx' id='maxx' size='15' value='0.5'/></td>
+	      <td><span class='error' id='maxx-error'>Max X error here</span></td>
+	    </tr>
+	    <tr>
+	      <td><label for='maxy'>Max Y:</label></td>
+	      <td><input type='text' name='maxy' id='maxy' size='15' value='1.25'/></td>
+	      <td><span class='error' id='maxy-error'>Max Y error here</span></td>
+	    </tr>
+	    <tr>
+	      <td><label for='iters'>Iterations:</label></td>
+	      <td><input type='text' name='iters' id='iters' size='15' value='20'/></td>
+	      <td><span class='error' id='iters-error'>Iterations error here</span></td>
+	    </tr>
+	    <tr>
+	      <td><label for='iters'>Delay:</label></td>
+	      <td><input type='text' name='delay' id='delay' size='15' value='0'/></td>
+	      <td><span class='error' id='delay-error'>Delay error here</span></td>
+	    </tr>
+	    <tr>
+	      <td><label for='iters'>Steps:</label></td>
+	      <td><input type='text' name='steps' id='steps' size='15' value='10'/></td>
+	      <td><span class='error' id='steps-error'>Steps error here</span></td>
+	    </tr>
+	  </tbody>
+	</table>
+	<p>
+	  <button type='button' id='run_start'>Start</button>
+	  <button type='button' id='run_stop'>Stop</button>
+	  <button type='button' id='run_step'>Step</button>
+	  <button type='button' id='run_redraw'>Redraw</button>
+	  <button type='button' id='run_restore'>Restore Defaults</button>
+	</p>
+      </div>
+      <div id='status'>
+	<p id='message'>Running</p>
+      </div>
+      <div id='about'>
+<p>About the Mandelbrot Set Visualization Demo</p>
+<p>This is a little project to help me learn about client-side javascript and html 5 canvases.</p>
+<p>How to use:</p>
+<p>The input fields <em>Min X</em>, <em>Min Y</em>, <em>Max X</em>, and <em>Max Y</em> determine the bounds of the area to be drawn. You can also zoom in by left-clicking and zoom out by right-clicking.</p>
+<p>Iterations: determines how many iterations the algorithm will use to determine if a point is in the Mandelbrot Set. Set this value higher when you zoom in close to continue to see detail.</p>
+<p><em>Delay</em>: this will cause the renderer to run slower if you want to watch it happen.</p>
+<p><em>Steps</em>: determines how many rectangles (see algorithm below) will be drawn per event loop. Higher values will render the image faster, at the expense of responsiveness. </p>
+<p>How it works:</p>
+<p>The algorithm for generating parts of the Mandelbrot set is straightforward (see <a href='http://en.wikipedia.org/wiki/Mandelbrot_set#Escape_time_algorithm'>here</a>). Each pixel needs to be tested to determine whether it is in the set or to determine how many iterations are needed to reach escape criteria.</p>
+<p>However, the set is visually interesting only at the borders of the set, and so to test each pixel in a linear fashion would spend a lot of time rendering uninteresting parts before getting to the interesting parts. This project applies an additional algorithm to find and focus on the more interesting parts first.</p>
+<p>The algorithm is based on one described <a href='http://www.math.utah.edu/~pa/math/mandelbrot/mandelbrot.html'>here</a>.</p>
+<p>It involves subdividing the drawing area into smaller and smaller rectangles. Each rectangle is classified as to how "interesting" it is based on the variation in how long it takes each corner to escape from the set. The bigger the variance, the more likely it is to contain interesting structure. The algorithm renders the "most interesting" rectangles first.</p>
+      </div>
+    <script data-main='js/app.js' src='js/require.js'></script>
+  </body>
+</html>
